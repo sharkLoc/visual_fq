@@ -8,7 +8,7 @@ A fastq file visualization tool 🦀📈🚀
 
 ```sudo apt install pkg-config libfreetype6-dev libfontconfig1-dev```
 
-### CentOS Linux
+### CentOS Linux:
 
 ```sudo yum install pkg-config freetype-devel fontconfig-devel```
 
@@ -22,7 +22,7 @@ cd visual_fq
 cargo b --release
 ```
 
-### usage
+## usage
 
 ```bash
 ./target/release/visual_fq
@@ -38,7 +38,7 @@ result files:
          out.matrix  summary.log  Base_plot.png
 ```
 
-### output
+## output
 output plot: `Base_plot.png`
 
 ![Base_plot](https://user-images.githubusercontent.com/50580507/176699721-8045127f-6dab-4caf-98a7-fb62f758fd3d.png)
