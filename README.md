@@ -206,3 +206,13 @@ Max read length:        150
 Reads average length:   150.0
 Total GC content:       36.84
 ```
+
+## Task list
+
+*   [x] add base distrbution plot
+
+*   [x] add output matrix file and summary log
+
+*   [ ] add quality plot
+
+** any bugs please report issues **💖 
