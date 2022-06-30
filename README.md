@@ -41,7 +41,8 @@ result files:
 ### output
 output plot: `Base_plot.png`
 
-![Base_plot.png](./test_file/Base_plot.png)
+![Base_plot](https://user-images.githubusercontent.com/50580507/176699721-8045127f-6dab-4caf-98a7-fb62f758fd3d.png)
+
 
 output file: `out.matrix` 
 ```
