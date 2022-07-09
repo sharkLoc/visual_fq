@@ -9,7 +9,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     if args.len() == 1 {
         println!("[Usage information]\nuncompressed fastq:\n\t{} your_file.fq > out.matrix 2> summary.log\n",&args[0]);
         println!("compressed fastq:\n\t gzip -dc your_file.fq.gz | {} /dev/stdin > out.matrix 2> summary.log\n",&args[0]);
-        println!("result files:\n\t out.matrix  summary.log  Base_plot.png\n");
+        println!("result files:\n\t out.matrix  summary.log  Base_plot.png Qual_plot.png\n");
         std::process::exit(1);
     }
 
@@ -168,6 +168,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         "Total GC content:\t{:.2}",
         total_gc as f64 / total_nt as f64 * 100.0
     );
+
     // line plot for base A T G C N rate in position
     let root = BitMapBackend::new("Base_plot.png", (960, 540)).into_drawing_area();
     root.fill(&WHITE)?;
@@ -233,6 +234,62 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .border_style(&BLACK)
         .position(SeriesLabelPosition::UpperRight)
         .draw()?;
+
+    // heatmap plot for base qualtity
+    let mut plot_heatmap: Vec<(u32, u8, u32)> = Vec::new();
+    let mut max = 0;
+    for i in 0..max_readlen {
+        let x = i + 1;
+        if let Some(tmp) = pos_info.get(&x) {
+            for j in 0..=max_qvalue {
+                let count = match tmp.get(&j) {
+                    Some(v) => v,
+                    None => &0,
+                };
+                if max < *count {
+                    max = *count;
+                }
+                plot_heatmap.push((x, j, *count));
+            }
+        }
+    }
+    let heatmap = BitMapBackend::new("Qual_plot.png", (960, 540)).into_drawing_area();
+    heatmap.fill(&WHITE)?;
+
+    let mut chart = ChartBuilder::on(&heatmap)
+        .caption("quality distrbution plot", ("sans-serif", 40))
+        .margin(10)
+        .x_label_area_size(40)
+        .y_label_area_size(40)
+        .build_cartesian_2d(0u32..(max_readlen + 1), 0u32..(max_qvalue + 1) as u32)?;
+
+    chart
+        .configure_mesh()
+        .x_labels(20)
+        .y_labels(20)
+        .x_label_offset(0)
+        .y_label_offset(0)
+        .disable_x_mesh()
+        .disable_y_mesh()
+        .label_style(("sans-serif", 20))
+        .draw()?;
+
+    chart.draw_series(
+        plot_heatmap
+            .iter()
+            .map(move |(x, y, z)| (*x, *y as u32, *z as f64))
+            .map(|(x, y, z)| {
+                Rectangle::new(
+                    [(x, y), (x + 1, y + 1)],
+                    HSLColor(
+                        20.0 / 360.0 * (1.0 - z / max as f64), // 单色系渐变
+                        1.0,                                   // 灰度（对比度）
+                        1.0 - z / max as f64, // 亮度 (明暗度: black :0 --> white: 1)
+                    )
+                    .filled(),
+                )
+            }),
+    )?;
 
     Ok(())
 }
