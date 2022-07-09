@@ -45,6 +45,7 @@ output plot: `Base_plot.png`
 
 output plot: `Qual_plot.png`
 
+![Qual_plot](https://user-images.githubusercontent.com/50580507/178108552-90840ba7-4821-4c6a-becc-f69768773c42.png)
 
 
 output file: `out.matrix` 
