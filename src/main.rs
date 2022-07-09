@@ -265,6 +265,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     chart
         .configure_mesh()
+        .x_desc("position")
         .x_labels(20)
         .y_labels(20)
         .x_label_offset(0)
