@@ -43,6 +43,9 @@ output plot: `Base_plot.png`
 
 ![Base_plot](https://user-images.githubusercontent.com/50580507/176699721-8045127f-6dab-4caf-98a7-fb62f758fd3d.png)
 
+output plot: `Qual_plot.png`
+
+
 
 output file: `out.matrix` 
 ```
@@ -213,6 +216,8 @@ Total GC content:       36.84
 
 *   [x] add output matrix file and summary log
 
-*   [ ] add quality plot
+*   [x] add quality plot
+
+*   [ ] add command line args
 
 ** any bugs please report issues **💖 
