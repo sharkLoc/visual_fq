@@ -217,8 +217,10 @@ Total GC content:       36.84
 
 *   [x] add output matrix file and summary log
 
-*   [x] add quality plot
+*   [x] add base quality plot
 
 *   [ ] add command line args
+
+*   [ ] rename output png file
 
 ** any bugs please report issues **💖 
