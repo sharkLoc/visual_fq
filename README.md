@@ -25,17 +25,24 @@ cargo b --release
 ## usage
 
 ```bash
-./target/release/visual_fq
+$./visual_fq --help
+visual_fq
+title
 
-[Usage information]
-uncompressed fastq:
-        ./target/release/visual_fq your_file.fq > out.matrix 2> summary.log
+USAGE:
+    visual_fq [OPTIONS] --read1 <READ1> --out <OUT> --log <LOG>
 
-compressed fastq:
-         gzip -dc your_file.fq.gz | ./target/release/visual_fq /dev/stdin > out.matrix 2> summary.log
+OPTIONS:
+    -i, --read1 <READ1>          input fastq1 file
+    -I, --read2 <READ2>          input fastq2 file [for PE reads]
+    -o, --out <OUT>              output detail matrix file
+    -O, --log <LOG>              output summary log file
+    -b, --fig-base <FIG_BASE>    output base figure prefix name [default: base_plot]
+    -q, --fig-qual <FIG_QUAL>    output quality figure prefix name [default: qual_plot]
+    -w, --width <WIDTH>          set output figure width [default: 960]
+    -h, --height <HEIGHT>        set output figure height [default: 540]
+        --help                   Print help information
 
-result files:
-         out.matrix  summary.log  Base_plot.png
 ```
 
 ## output
@@ -202,25 +209,18 @@ pos:148	100000	31.38	31.05	19.17	18.40	0.00	0	0	0	0	0	0	0	0	4487	0	0	0	26753	0	0
 pos:149	100000	31.30	31.05	18.83	18.82	0.00	0	0	0	0	0	0	0	0	2313	0	0	0	16224	0	0	0	0	0	0	0	0	0	13607	0	0	0	0	10976	0	0	0	0	16760	0	0	0	0	14934	0	0	0	25186
 pos:150	100000	31.38	31.04	18.79	18.79	0.00	0	0	0	0	0	0	0	0	2439	0	0	0	15943	0	0	0	0	0	0	0	0	0	10277	0	0	0	0	10001	0	0	0	0	16133	0	0	0	0	15672	0	0	0	29535
 ```
-output file: `summary.log`
-```
-Total read number:      100000
-Total base number:      15000000
-Max read length:        150
-Reads average length:   150.0
-Total GC content:       36.84
-```
+
 
 ## Task list
 
 *   [x] add base distrbution plot
 
-*   [x] add output matrix file and summary log
+*   [x] add output matrix file
 
 *   [x] add base quality plot
 
-*   [ ] add command line args
+*   [x] add command line args
 
-*   [ ] rename output png file
+*   [x] rename output png file
 
 ** any bugs please report issues **💖 
